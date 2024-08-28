@@ -14,18 +14,7 @@ router.register(r'books', BookViewSet)
 urlpatterns = [
     path('', include(router.urls)),
 ]
+ 
+ 
 
-router = DefaultRouter()
-router.register(r'books', BookViewSet)
-
-urlpatterns = [
-    path('', include(router.urls)),
-]
-
-
-router = DefaultRouter()
-router.register(r'books', BookViewSet)
-
-urlpatterns = [
-    path('', include(router.urls)),
-]
+ 
