@@ -24,6 +24,12 @@ SECRET_KEY = 'django-insecure-zvl8hwawsokb&gm5&48i-!t&m!$0)71z90-)+sp=e*192a84e_
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+SECURE_BROWSER_XSS_FILTER = True
+X_FRAME_OPTIONS = 'DENY'
+SECURE_CONTENT_TYPE_NOSNIFF = True
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+
 
 ALLOWED_HOSTS = []
 
@@ -121,3 +127,6 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Custom user model
+AUTH_USER_MODEL = 'bookshelf.CustomUser'  # Pointing to your custom user model
