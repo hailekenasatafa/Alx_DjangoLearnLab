@@ -21,3 +21,16 @@ def form_example_view(request):
         # Handle the form submission (e.g., process data, save to database)
         pass
     return render(request, 'bookshelf/form_example.html', {'form': form})
+
+
+def search_books(request):
+    form = BookSearchForm(request.GET or None)
+    books = Book.objects.all()
+    if form.is_valid():
+        query = form.cleaned_data.get('q')
+        if query:
+            books = books.filter(title__icontains=query)
+    return render(request, 'bookshelf/book_list.html', {'form': form, 'books': books})
+
+
+
