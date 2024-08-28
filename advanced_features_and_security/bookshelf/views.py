@@ -19,10 +19,6 @@ def form_example_view(request):
         pass
     return render(request, 'bookshelf/form_example.html', {'form': form})
 
- 
- 
-
-
 def example_form_view(request):
     form = ExampleForm(request.POST or None)
     if form.is_valid():
@@ -32,4 +28,7 @@ def example_form_view(request):
         message = form.cleaned_data['message']
         # You can add logic to save the data or send an email here
     return render(request, 'bookshelf/form_example.html', {'form': form})
+ 
+ 
+ 
 
