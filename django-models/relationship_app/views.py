@@ -28,3 +28,23 @@ def user_login(request):
 def user_logout(request):
     logout(request)
     return redirect('login')
+
+from django.contrib.auth.decorators import user_passes_test
+from django.shortcuts import render, HttpResponse
+
+def check_role(role):
+    def decorator(user):
+        return user.is_authenticated and user.userprofile.role == role
+    return decorator
+
+@user_passes_test(check_role('Admin'))
+def admin_view(request):
+    return HttpResponse("This is the Admin view.")
+
+@user_passes_test(check_role('Librarian'))
+def librarian_view(request):
+    return HttpResponse("This is the Librarian view.")
+
+@user_passes_test(check_role('Member'))
+def member_view(request):
+    return HttpResponse("This is the Member view.")
