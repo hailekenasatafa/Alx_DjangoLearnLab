@@ -146,3 +146,5 @@ CSRF_COOKIE_SECURE = True  # Transmit CSRF cookies only over HTTPS
 X_FRAME_OPTIONS = 'DENY'  # Prevent clickjacking by denying iframe embedding
 SECURE_CONTENT_TYPE_NOSNIFF = True  # Prevent browsers from MIME-sniffing
 SECURE_BROWSER_XSS_FILTER = True 
+"SECURE_PROXY_SSL_HEADER",
+"HTTP_X_FORWARDED_PROTO" 
