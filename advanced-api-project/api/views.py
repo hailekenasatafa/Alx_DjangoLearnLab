@@ -1,6 +1,8 @@
 from rest_framework import generics, permissions
 from .models import Book
 from .serializers import BookSerializer
+from .models import Book
+from .serializers import BookSerializer
 
 # ListView to retrieve all books and CreateView to add a new book
 class BookListCreateView(generics.ListCreateAPIView):
@@ -26,3 +28,35 @@ class BookRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
     def perform_destroy(self, instance):
         # Custom logic during deletion (if needed)
         instance.delete()
+
+
+
+
+# CreateView: Handles listing all books and creating new ones
+class BookListCreateView(generics.ListCreateAPIView):
+    queryset = Book.objects.all()
+    serializer_class = BookSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+    def perform_create(self, serializer):
+        serializer.save()
+
+# DetailView: Handles retrieving, updating, and deleting a book
+class BookDetailView(generics.RetrieveAPIView):
+    queryset = Book.objects.all()
+    serializer_class = BookSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+# UpdateView: Handles updating a book
+class BookUpdateView(generics.UpdateAPIView):
+    queryset = Book.objects.all()
+    serializer_class = BookSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+# DeleteView: Handles deleting a book
+class BookDeleteView(generics.DestroyAPIView):
+    queryset = Book.objects.all()
+    serializer_class = BookSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+
