@@ -7,6 +7,11 @@ from rest_framework import generics
 from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated  # Add these imports
 from .models import Book
 from .serializers import BookSerializer
+from django_filters import rest_framework as filters
+from rest_framework import generics
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from .models import Book
+from .serializers import BookSerializer
 
 # ListView to retrieve all books and CreateView to add a new book
 class BookListCreateView(generics.ListCreateAPIView):
@@ -94,3 +99,27 @@ class BookDeleteView(generics.DestroyAPIView):
     permission_classes = [IsAuthenticated]  # Only authenticated users can delete
 
 
+
+
+# Define a filter set for the Book model
+class BookFilter(filters.FilterSet):
+    class Meta:
+        model = Book
+        fields = {
+            'title': ['icontains'],  # Case-insensitive contains
+            'author__name': ['icontains'],  # Search by author's name
+            'publication_year': ['exact', 'gte', 'lte'],  # Filter by year or year range
+        }
+
+class BookListView(generics.ListAPIView):
+    queryset = Book.objects.all()
+    serializer_class = BookSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
+    filter_backends = [filters.DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
+    
+    # Apply the filter class
+    filterset_class = BookFilter
+
+    # Define the fields you want to search and order by
+    search_fields = ['title', 'author__name']
+    ordering_fields = ['title', 'publication_year']
