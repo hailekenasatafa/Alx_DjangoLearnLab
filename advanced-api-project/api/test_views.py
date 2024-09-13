@@ -4,6 +4,12 @@ from rest_framework.test import APITestCase
 from rest_framework.authtoken.models import Token
 from django.contrib.auth.models import User
 from .models import Book, Author
+from django.urls import reverse
+from rest_framework import status
+from rest_framework.test import APITestCase
+from django.contrib.auth.models import User
+from .models import Book, Author
+
 
 class BookAPITestCase(APITestCase):
 
@@ -95,3 +101,37 @@ class BookAPITestCase(APITestCase):
         response = self.client.get(url, {'ordering': 'title'})
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data[0]['title'], "A Game of Thrones")
+
+
+class BookAPITestCase(APITestCase):
+
+    def setUp(self):
+        # Create a test user
+        self.user = User.objects.create_user(username='testuser', password='testpass')
+
+        # Log in the user
+        self.client.login(username='testuser', password='testpass')
+
+        # Create a test author
+        self.author = Author.objects.create(name="J.K. Rowling")
+
+        # Create a test book
+        self.book = Book.objects.create(
+            title="Harry Potter and the Philosopher's Stone",
+            author=self.author,
+            publication_year=1997
+        )
+
+
+def test_create_book(self):
+    # Test for creating a book
+    url = reverse('book-list')
+    data = {
+        "title": "Harry Potter and the Chamber of Secrets",
+        "author": self.author.pk,
+        "publication_year": 1998
+    }
+    response = self.client.post(url, data, format='json')
+    self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+    self.assertEqual(Book.objects.count(), 2)
+
