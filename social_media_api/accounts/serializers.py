@@ -22,6 +22,7 @@ class UserSerializer(serializers.ModelSerializer):
         user = get_user_model().objects.create_user(**validated_data)  # Use create_user to hash the password
         user.set_password(password)
         user.save()
+        serializers.CharField()
 
         # Create a token for the user
         Token.objects.create(user=user)
