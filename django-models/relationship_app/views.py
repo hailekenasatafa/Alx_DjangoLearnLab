@@ -48,3 +48,4 @@ def librarian_view(request):
 @user_passes_test(check_role('Member'))
 def member_view(request):
     return HttpResponse("This is the Member view.")
+"relationship_app/register.html"
