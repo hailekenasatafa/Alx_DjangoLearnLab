@@ -10,3 +10,4 @@ class Book(models.Model):
 
 "date_of_birth", "profile_photo"
 "class CustomUser(AbstractUser):",
+["class CustomUserManager(BaseUserManager):", "create_user", "create_superuser"]
