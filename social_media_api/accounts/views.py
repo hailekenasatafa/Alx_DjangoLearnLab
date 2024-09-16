@@ -33,12 +33,14 @@ class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
     permission_classes = [IsAuthenticated]
     "generics.GenericAPIView", "permissions.IsAuthenticated"
+    "Post.objects.filter(author__in=following_users).order_by", "following.all()"
 
     @action(detail=True, methods=['post'])
     def follow(self, request, pk=None):
         user_to_follow = self.get_object()
         request.user.following.add(user_to_follow)
         return Response({'status': 'following'}, status=status.HTTP_200_OK)
+    
 
     @action(detail=True, methods=['post'])
     def unfollow(self, request, pk=None):
