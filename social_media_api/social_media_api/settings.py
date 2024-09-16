@@ -130,3 +130,6 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 10,
 }
 "posts"
+
+DEBUG = False
+ALLOWED_HOSTS = ['your_domain.com', 'your_server_ip']
