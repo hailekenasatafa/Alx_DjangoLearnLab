@@ -19,10 +19,11 @@ class UserSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         # Remove the password from the validated data before passing it to create_user
         password = validated_data.pop('password')
-        user = User.objects.create_user(**validated_data)  # Use create_user to hash the password
+        user = get_user_model().objects.create_user(**validated_data)  # Use create_user to hash the password
         user.set_password(password)
         user.save()
 
         # Create a token for the user
         Token.objects.create(user=user)
         return user
+ 
