@@ -32,6 +32,7 @@ class UserViewSet(viewsets.ModelViewSet):
     queryset = CustomUser.objects.all()
     serializer_class = UserSerializer
     permission_classes = [IsAuthenticated]
+    "generics.GenericAPIView", "permissions.IsAuthenticated"
 
     @action(detail=True, methods=['post'])
     def follow(self, request, pk=None):
