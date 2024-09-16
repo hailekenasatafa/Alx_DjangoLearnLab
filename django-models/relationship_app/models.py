@@ -56,3 +56,4 @@ def save_user_profile(sender, instance, **kwargs):
     instance.userprofile.save()
 
 "class Meta", "permissions"
+"can_add_book", "can_change_book", "can_delete_book"
