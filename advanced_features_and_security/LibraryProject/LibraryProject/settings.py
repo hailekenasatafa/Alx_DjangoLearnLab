@@ -148,3 +148,4 @@ SECURE_CONTENT_TYPE_NOSNIFF = True  # Prevent browsers from MIME-sniffing
 SECURE_BROWSER_XSS_FILTER = True 
 "SECURE_PROXY_SSL_HEADER",
 "HTTP_X_FORWARDED_PROTO" 
+"bookshelf.CustomUser"
