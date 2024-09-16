@@ -133,3 +133,4 @@ REST_FRAMEWORK = {
 
 DEBUG = False
 ALLOWED_HOSTS = ['your_domain.com', 'your_server_ip']
+"SECURE_BROWSER_XSS_FILTER", "X_FRAME_OPTIONS", "SECURE_SSL_REDIRECT"
